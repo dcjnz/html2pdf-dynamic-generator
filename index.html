@@ -2,34 +2,27 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>PDF Generator</title>
+  <title>Oferta PDF Generator</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    #output { padding: 20px; background: #fff; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="output"></div>
+
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const rawHTML = decodeURIComponent(params.get("html") || "");
-    const rawCSS = decodeURIComponent(params.get("css") || "");
-
-    if (rawHTML) {
-      const out = document.getElementById("output");
-      out.innerHTML = rawHTML;
-
-      // dodaj CSS jako <style>
-      if (rawCSS) {
-        const styleTag = document.createElement("style");
-        styleTag.innerHTML = rawCSS;
-        document.head.appendChild(styleTag);
-      }
-
-      setTimeout(() => html2pdf().from(out).save("dokument.pdf"), 500);
+    const htmlParam = new URLSearchParams(window.location.search).get("html");
+    const html = decodeURIComponent(htmlParam || "");
+    
+    if (!html) {
+      document.body.innerHTML = "<p>Błąd: Brak treści HTML</p>";
     } else {
-      document.body.innerHTML = "<p>Brak parametru html w URL</p>";
+      const output = document.getElementById("output");
+      output.innerHTML = html;
+
+      setTimeout(() => {
+        const dzisiaj = new Date().toISOString().slice(0, 10);
+        html2pdf().from(output).save(`Oferta_${dzisiaj}.pdf`);
+      }, 500);
     }
   </script>
 </body>
