@@ -13,11 +13,21 @@
   <div id="output"></div>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const raw = decodeURIComponent(params.get("html") || "");
-    if (raw) {
+    const rawHTML = decodeURIComponent(params.get("html") || "");
+    const rawCSS = decodeURIComponent(params.get("css") || "");
+
+    if (rawHTML) {
       const out = document.getElementById("output");
-      out.innerHTML = raw;
-      setTimeout(() => html2pdf().from(out).save("dokument.pdf"), 300);
+      out.innerHTML = rawHTML;
+
+      // dodaj CSS jako <style>
+      if (rawCSS) {
+        const styleTag = document.createElement("style");
+        styleTag.innerHTML = rawCSS;
+        document.head.appendChild(styleTag);
+      }
+
+      setTimeout(() => html2pdf().from(out).save("dokument.pdf"), 500);
     } else {
       document.body.innerHTML = "<p>Brak parametru html w URL</p>";
     }
