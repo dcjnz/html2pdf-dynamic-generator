@@ -9,11 +9,17 @@ body {
   width: 210mm;
   height: 297mm;
   overflow: hidden;
-  background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/vvuxWmTjZ0iipA27ZoDs/IMG_2694.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #333;
+  background-color: white;
+}
+
+#bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 #content {
@@ -21,9 +27,8 @@ body {
   z-index: 1;
   padding: 40px;
   box-sizing: border-box;
+  color: #333;
 }
-
-/* Twoje style pozostają bez zmian */
 
 h1 {
   text-align: center;
@@ -36,25 +41,72 @@ h1 {
 
 .section ul {
   list-style: none;
+  margin: auto;
   padding-left: 0;
 }
 
+.section li {
+  font-size: 15px;
+}
+
 .section li::before {
-  content: "- ";
+  content: "-";
+  margin-right: 5px;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 40px;
-  font-size: 14px;
-}
-
-table, th, td {
+  border-spacing: 0;
   border: 1px solid black;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 50px;
+  width: 100%;
 }
 
-th, td {
-  padding: 6px 10px;
-  text-align: left;
+table th {
+  font-size: 16px;
+}
+
+table td, th {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+  border-right: 0;
+  font-size: 13px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tr:last-child td:nth-child(2) {
+  border-right: 0;
+  border-left: 0;
+}
+
+table tr:last-child td:nth-child(3) {
+  border-left: 0;
+}
+
+table tr:last-child td {
+  font-weight: 800;
+}
+
+.section p {
+  margin-bottom: 10px;
+}
+
+.contact {
+  margin-top: 40px;
 }
