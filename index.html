@@ -1,60 +1,49 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Oferta PDF Generator</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
     }
-    #output {
-      display: none;
-    }
   </style>
 </head>
 <body>
+  <div id="output"></div>
 
-<div id="output"></div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const htmlEncoded = params.get("html");
+    const html = decodeURIComponent(htmlEncoded || "");
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const htmlEncoded = params.get("html");
-  const html = decodeURIComponent(htmlEncoded || "");
+    if (!html) {
+      document.body.innerHTML = "<p>⚠️ Brak treści HTML (parametr ?html=... nie został podany)</p>";
+    } else {
+      const output = document.getElementById("output");
+      output.innerHTML = html;
 
-  if (!html || !html.includes("pdf-area")) {
-    document.body.innerHTML = "<p style='padding:2rem;font-size:18px;'>⚠️ Błąd: Brak poprawnej zawartości lub brak <code>id='pdf-area'</code> w HTML.</p>";
-  } else {
-    const output = document.getElementById("output");
-    output.innerHTML = html;
+      setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-    setTimeout(() => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-
-      const pdfArea = document.getElementById("pdf-area");
-      if (!pdfArea) {
-        alert("Nie znaleziono #pdf-area w HTML");
-        return;
-      }
-
-      doc.html(pdfArea, {
-        callback: function (doc) {
-          const blob = doc.output("blob");
-          const blobUrl = URL.createObjectURL(blob);
-          window.location.href = blobUrl;
-        },
-        x: 0,
-        y: 0,
-        autoPaging: true,
-        html2canvas: { scale: 1.5, useCORS: true }
-      });
-    }, 600);
-  }
-</script>
-
+        doc.html(document.getElementById("pdf-area"), {
+          callback: function (doc) {
+            const blob = doc.output('blob');
+            const blobUrl = URL.createObjectURL(blob);
+            window.open(blobUrl, '_blank'); // ⬅️ Otwiera PDF w nowej karcie
+          },
+          x: 0,
+          y: 0,
+          autoPaging: true,
+          html2canvas: { scale: 1.5, useCORS: true }
+        });
+      }, 500);
+    }
+  </script>
 </body>
 </html>
