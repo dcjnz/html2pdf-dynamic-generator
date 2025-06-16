@@ -2,59 +2,38 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>PDF z kopiowalnym tekstem</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+  <title>Oferta PDF Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<script>
-  const dataParam = new URLSearchParams(window.location.search).get("data");
-  if (!dataParam) {
-    document.body.innerHTML = "<p style='padding:20px;'>❗ Brak parametru ?data=</p>";
-    throw new Error("Brak danych");
-  }
+  <div id="output"></div>
 
-  const data = JSON.parse(decodeURIComponent(dataParam));
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const htmlEncoded = params.get("html");
+    const html = decodeURIComponent(htmlEncoded || "");
 
-  const docDef = {
-    content: [
-      { text: data.title || "Oferta", style: "header" },
+    if (!html) {
+      document.body.innerHTML = "<p>Błąd: Brak treści HTML (brakuje parametru ?html=...)</p>";
+    } else {
+      const output = document.getElementById("output");
+      output.innerHTML = html;
 
-      {
-        table: {
-          widths: ["*", "auto", "auto", "auto"],
-          body: [
-            ["Przedmiot", "Cena", "Ilość", "Razem"],
-            ...(data.items || []).map(i => [
-              i.name, i.price, i.qty, i.total
-            ])
-          ]
-        },
-        margin: [0, 10, 0, 20]
-      },
-
-      ...(data.notes || []).map(note => ({ text: `• ${note}`, margin: [0, 0, 0, 5] })),
-
-      { text: data.signature || "", margin: [0, 30, 0, 0] }
-    ],
-    styles: {
-      header: {
-        fontSize: 20,
-        bold: true,
-        alignment: "center",
-        margin: [0, 0, 0, 10]
-      }
+      setTimeout(() => {
+        html2pdf().set({
+          margin: 0,
+          filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            scrollY: 0,
+            useCORS: true
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(document.getElementById("pdf-area")).save();
+      }, 700);
     }
-  };
-
-  pdfMake.createPdf(docDef).open();
-</script>
+  </script>
 </body>
 </html>
