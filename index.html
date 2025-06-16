@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Oferta PDF</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>PDF z tekstem</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="output" style="display: none;"></div>
+  <div id="output"></div>
 
   <script>
     const htmlParam = new URLSearchParams(window.location.search).get("html");
     const html = decodeURIComponent(htmlParam || "");
-
     if (!html) {
-      document.body.innerHTML = "<p>Brak treści HTML (dodaj ?html=...)</p>";
+      document.body.innerHTML = "<p>Brak HTML</p>";
     } else {
       const output = document.getElementById("output");
       output.innerHTML = html;
 
-      // Poczekaj aż DOM się załaduje
       setTimeout(() => {
-        const element = document.getElementById("pdf-area");
-        html2pdf().set({
-          margin: 0,
-          filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        }).from(element).save();
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.html(document.getElementById("pdf-area"), {
+          callback: function (doc) {
+            const blob = doc.output("blob");
+            const blobURL = URL.createObjectURL(blob);
+            window.location.href = blobURL; // otwiera PDF jako tekst
+          },
+          x: 10,
+          y: 10
+        });
       }, 500);
     }
   </script>
