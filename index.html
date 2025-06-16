@@ -5,16 +5,9 @@
   <title>Oferta PDF Generator</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-  </style>
 </head>
 <body>
-  <div id="output"></div>
+  <div id="output" style="display: none;"></div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -27,22 +20,21 @@
       const output = document.getElementById("output");
       output.innerHTML = html;
 
-      setTimeout(() => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
+      // Ustaw czas na wczytanie DOM i stylów
+      setTimeout(() => {
         doc.html(document.getElementById("pdf-area"), {
           callback: function (doc) {
-            const blob = doc.output('blob');
-            const blobUrl = URL.createObjectURL(blob);
-            window.open(blobUrl, '_blank'); // ⬅️ Otwiera PDF w nowej karcie
+            doc.save(`Oferta_${new Date().toISOString().slice(0, 10)}.pdf`);
           },
           x: 0,
           y: 0,
           autoPaging: true,
           html2canvas: { scale: 1.5, useCORS: true }
         });
-      }, 500);
+      }, 700);
     }
   </script>
 </body>
