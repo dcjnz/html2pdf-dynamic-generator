@@ -1,60 +1,46 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Oferta PDF Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="output"></div>
 
-#pdf-area {
-  position: relative;
-  width: 210mm;
-  height: 297mm;
-  overflow: hidden;
-  background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/vvuxWmTjZ0iipA27ZoDs/IMG_2694.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #333;
-}
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const htmlEncoded = params.get("html");
+    const html = decodeURIComponent(htmlEncoded || "");
 
-#content {
-  position: relative;
-  z-index: 1;
-  padding: 40px;
-  box-sizing: border-box;
-}
+    if (!html) {
+      document.body.innerHTML = "<p>⚠️ Brak treści HTML (brakuje parametru ?html=...)</p>";
+    } else {
+      const output = document.getElementById("output");
+      output.innerHTML = html;
 
-/* Twoje style pozostają bez zmian */
+      // Po odczekaniu chwili — generuj PDF
+      setTimeout(() => {
+        const pdfArea = document.getElementById("pdf-area");
+        if (!pdfArea) {
+          alert("Nie znaleziono elementu #pdf-area — sprawdź, czy zakodowany HTML zawiera <div id='pdf-area'>...");
+          return;
+        }
 
-h1 {
-  text-align: center;
-  margin-top: 100px;
-}
-
-.section {
-  margin-bottom: 20px;
-}
-
-.section ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.section li::before {
-  content: "- ";
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 40px;
-  font-size: 14px;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-
-th, td {
-  padding: 6px 10px;
-  text-align: left;
-}
+        html2pdf().set({
+          margin: 0,
+          filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            scrollY: 0,
+            useCORS: true
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(pdfArea).save();
+      }, 700);
+    }
+  </script>
+</body>
+</html>
