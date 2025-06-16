@@ -2,9 +2,16 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>PDF Generator z tekstem</title>
+  <title>Oferta PDF Generator</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+  </style>
 </head>
 <body>
   <div id="output"></div>
@@ -22,15 +29,13 @@
 
       setTimeout(() => {
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({
-          unit: 'mm',
-          format: 'a4',
-          orientation: 'portrait'
-        });
+        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
         doc.html(document.getElementById("pdf-area"), {
           callback: function (doc) {
-            doc.save(`Oferta_${new Date().toISOString().slice(0, 10)}.pdf`);
+            const blob = doc.output('blob');
+            const blobUrl = URL.createObjectURL(blob);
+            window.open(blobUrl, '_blank'); // ⬅️ Otwiera PDF w nowej karcie
           },
           x: 0,
           y: 0,
