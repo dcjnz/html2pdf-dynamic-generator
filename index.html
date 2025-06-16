@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Oferta PDF Generator</title>
+  <title>Oferta PDF</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <style>
@@ -13,7 +13,7 @@
   </style>
 </head>
 <body>
-  <div id="output"></div>
+  <div id="output" style="display: none;"></div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -21,7 +21,7 @@
     const html = decodeURIComponent(htmlEncoded || "");
 
     if (!html) {
-      document.body.innerHTML = "<p>⚠️ Brak treści HTML (brakuje parametru ?html=...)</p>";
+      document.body.innerHTML = "<p>⚠️ Brak treści HTML (?html=...)</p>";
     } else {
       const output = document.getElementById("output");
       output.innerHTML = html;
@@ -32,16 +32,16 @@
 
         doc.html(document.getElementById("pdf-area"), {
           callback: function (doc) {
-            const blob = doc.output('blob');
+            const blob = doc.output("blob");
             const blobUrl = URL.createObjectURL(blob);
-            window.open(blobUrl, '_blank'); // ✅ PDF otwiera się w nowej karcie
+            location.href = blobUrl; // ✅ Otwiera PDF jako plik w przeglądarce
           },
           x: 0,
           y: 0,
           autoPaging: true,
           html2canvas: { scale: 1.5, useCORS: true }
         });
-      }, 500);
+      }, 700);
     }
   </script>
 </body>
