@@ -1,6 +1,11 @@
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
   font-family: Arial, sans-serif;
 }
 
@@ -9,7 +14,7 @@ body {
   width: 210mm;
   height: 297mm;
   overflow: hidden;
-  background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/vvuxWmTjZ0iipA27ZoDs/IMG_2694.jpeg");
+  background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/erfI3s1pt8JoVDnHimVt/papier%20firmowy.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,68 +24,88 @@ body {
 #content {
   position: relative;
   z-index: 1;
-  padding: 40px;
+  padding: 0px 35px;
   box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
-  margin-top: 100px;
-}
-
-.section {
-  margin-bottom: 20px;
-}
-
-.section ul {
-  list-style: none;
-  margin: auto;
-  padding-left: 0;
-}
-
-.section li {
-  font-size: 15px;
-}
-
-.section li::before {
-  content: "-";
-  margin-right: 5px;
+  margin-top: 170px;
+  font-size: 25px;
+  margin-bottom: 15px;
 }
 
 table {
+  font-family: Inter, sans-serif;
+  border-collapse: collapse;
   border-spacing: 0;
   border: 1px solid black;
-  border-radius: 10px;
-  font-size: 15px;
-  margin-bottom: 50px;
+  font-size: 12px;
   width: 100%;
+  margin-bottom: 35px;
+  border-radius: 7px;
+  border-style: hidden;
+  box-shadow: 0 0 0 1px #666;
+  overflow: hidden;
+}
+
+table tr:first-child {
+  background: linear-gradient(
+  135deg,
+  rgba(173, 216, 255, 0.5),
+  rgba(120, 190, 255, 0.5),
+  rgba(80, 170, 255, 0.5),
+  rgba(50, 150, 255, 0.5),
+  rgba(30, 130, 255, 0.5));
 }
 
 table th {
-  font-size: 16px;
+  font-size: 13.5px;
+  padding: 4px 0px;
 }
 
-table td, th {
+table span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+table td, table th {
   border: 1px solid black;
-  padding: 5px 10px;
+}
+
+table td {
+  padding: 5px 5px;
+  text-align: end;
+}
+
+table td:nth-child(2), table tr:nth-child(2) {
+  width: 18%;
+}
+
+table td:nth-child(3), table tr:nth-child(3) {
+  width: 8%;
+}
+
+table td:nth-child(4), table tr:nth-child(4) {
+  width: 15%;
+}
+
+table td:nth-child(3) {
+  text-align: center;
+  padding: 0;
+}
+
+table td:first-child {
+  text-align: start;
+}
+
+table td:last-child {
+  font-weight: 600;
 }
 
 table tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
   border-right: 0;
-  font-size: 13px;
-}
-
-table tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
-}
-
-table th:first-child {
-  border-top-left-radius: 10px;
-}
-
-table th:last-child {
-  border-top-right-radius: 10px;
+  font-size: 14px;
 }
 
 table tr:last-child td:nth-child(2) {
@@ -93,14 +118,34 @@ table tr:last-child td:nth-child(3) {
 }
 
 table tr:last-child td {
-  font-weight: 800;
+  font-weight: 700;
+}
+
+.section {
+  margin-bottom: 40px;
+  margin-left: 10px;
 }
 
 .section p {
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
-.contact {
-  margin-top: 40px;
+.section ul {
+  line-height: 120%;
+  list-style: none;
+  margin-left: 10px;
 }
 
+.section li::before {
+  content: "-";
+  margin-right: 5px;
+}
+
+.section li, .section2 li {
+  font-size: 13px;
+}
+
+.section2 {
+  
+}
