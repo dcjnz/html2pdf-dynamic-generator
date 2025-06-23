@@ -2,60 +2,57 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Debug HTML2PDF</title>
+  <title>PDF z HTML (kopiowalny tekst)</title>
 
-  <!-- PDFMake i czcionki -->
+  <!-- PDFMake -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-  <!-- HTML to PDFMake (Uwaga: działa z unpkg, cdn czasem zawodzi) -->
+  <!-- HTML-to-PDFMake -->
   <script src="https://unpkg.com/html-to-pdfmake/browser.js"></script>
 
+  <!-- Styl (opcjonalnie) -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="output" style="border: 2px dashed red; padding: 15px; margin: 15px;"></div>
+  <div id="output" style="display: none;"></div>
+  <div id="pdf-container" style="width:100%; height:100vh;"></div>
 
   <script>
-    const htmlEncoded = new URLSearchParams(window.location.search).get("html");
+    const htmlParam = new URLSearchParams(window.location.search).get("html");
 
-    if (!htmlEncoded) {
-      document.body.innerHTML = "<p>❌ Brak parametru ?html=...</p>";
-      throw new Error("Brak HTML");
+    if (!htmlParam) {
+      document.body.innerHTML = "<p>❗ Brak parametru ?html=...</p>";
+      throw new Error("Brak danych HTML");
     }
 
-    const html = decodeURIComponent(htmlEncoded);
+    const html = decodeURIComponent(htmlParam);
     const output = document.getElementById("output");
+    output.innerHTML = html;
 
-    // Dodaj testowy tekst przed i po
-    output.innerHTML = `
-      <p style="color:green;">✅ TEST: Wczytano początek outputu</p>
-      ${html}
-      <p style="color:blue;">✅ TEST: Wczytano koniec outputu</p>
-    `;
-
-    console.log("🔍 Decoded HTML:", html);
-    console.log("📦 Output innerHTML:", output.innerHTML);
-
-    // Konwertuj HTML do struktury PDFMake
-    let pdfmakeContent;
     try {
-      pdfmakeContent = htmlToPdfmake(output.innerHTML, { window });
-      console.log("✅ Parsed PDFMake content:", pdfmakeContent);
-    } catch (err) {
-      console.error("❌ Błąd podczas konwersji HTML do PDFMake:", err);
-    }
+      const pdfmakeContent = htmlToPdfmake(output.innerHTML, { window });
 
-    // Jeśli PDFMake content powstał — otwórz PDF
-    if (pdfmakeContent) {
-  pdfMake.createPdf({
-    content: pdfmakeContent,
-    defaultStyle: { font: 'Helvetica', fontSize: 11 }
-  }).open();
-} else {
-  alert("🚨 pdfmakeContent is empty or undefined!");
-  console.log("❌ pdfmakeContent:", pdfmakeContent);
-}
+      const docDefinition = {
+        content: pdfmakeContent,
+        defaultStyle: {
+          font: 'Helvetica',
+          fontSize: 11
+        }
+      };
+
+      pdfMake.createPdf(docDefinition).getDataUrl((dataUrl) => {
+        const iframe = document.createElement('iframe');
+        iframe.src = dataUrl;
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        iframe.style.border = 'none';
+        document.getElementById("pdf-container").appendChild(iframe);
+      });
+    } catch (e) {
+      console.error("❌ Błąd generowania PDF:", e);
+      document.body.innerHTML = "<p style='color:red;'>❌ Wystąpił błąd podczas generowania PDF. Sprawdź dane HTML.</p>";
+    }
   </script>
 </body>
 </html>
