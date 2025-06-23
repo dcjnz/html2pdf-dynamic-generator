@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <title>Oferta PDF</title>
 
-  <!-- pdfmake + czcionki -->
+  <!-- PDFMake -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-  <!-- html-to-pdfmake -->
+  <!-- HTML → PDFMake -->
   <script src="https://unpkg.com/html-to-pdfmake/browser.js"></script>
 
-  <!-- Twoje style (działają tylko dla wyświetlenia HTML na stronie, nie dla PDF) -->
+  <!-- (Opcjonalne) CSS dla widoku HTML -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -28,17 +28,18 @@
     const output = document.getElementById("output");
     output.innerHTML = html;
 
-    // Zamiana HTML → PDFMake (zadziała na DOM, nie stringu!)
-    const pdfmakeContent = htmlToPdfmake(output, { window });
+    // ✅ użyj stringa, NIE DOM elementu
+    const pdfmakeContent = htmlToPdfmake(output.innerHTML, { window });
 
-    // Utwórz PDF z kopiowalnym tekstem
-    pdfMake.createPdf({
+    const docDefinition = {
       content: pdfmakeContent,
       defaultStyle: {
         font: 'Helvetica',
         fontSize: 12
       }
-    }).open();
+    };
+
+    pdfMake.createPdf(docDefinition).open();
   </script>
 </body>
 </html>
