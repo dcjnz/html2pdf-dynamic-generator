@@ -47,14 +47,15 @@
     }
 
     // Jeśli PDFMake content powstał — otwórz PDF
-    if (pdfmakeContent && pdfmakeContent.length > 0) {
-      pdfMake.createPdf({
-        content: pdfmakeContent,
-        defaultStyle: { font: 'Helvetica', fontSize: 11 }
-      }).open();
-    } else {
-      console.warn("⚠️ Pusta zawartość PDF — sprawdź HTML");
-    }
+    if (pdfmakeContent) {
+  pdfMake.createPdf({
+    content: pdfmakeContent,
+    defaultStyle: { font: 'Helvetica', fontSize: 11 }
+  }).open();
+} else {
+  alert("🚨 pdfmakeContent is empty or undefined!");
+  console.log("❌ pdfmakeContent:", pdfmakeContent);
+}
   </script>
 </body>
 </html>
