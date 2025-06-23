@@ -2,38 +2,30 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Oferta PDF Generator</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Oferta PDF (tekstowy)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-pdfmake/3.0.4/html-to-pdfmake.min.js"></script>
 </head>
 <body>
-  <div id="output"></div>
+  <div id="output" style="display:none;"></div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const htmlEncoded = params.get("html");
-    const html = decodeURIComponent(htmlEncoded || "");
-
-    if (!html) {
-      document.body.innerHTML = "<p>Błąd: Brak treści HTML (brakuje parametru ?html=...)</p>";
-    } else {
-      const output = document.getElementById("output");
-      output.innerHTML = html;
-
-      setTimeout(() => {
-        html2pdf().set({
-          margin: 0,
-          filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: {
-            scale: 2,
-            scrollY: 0,
-            useCORS: true
-          },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        }).from(document.getElementById("pdf-area")).save();
-      }, 700);
+    const htmlEncoded = new URLSearchParams(window.location.search).get("html");
+    if (!htmlEncoded) {
+      document.body.innerHTML = "<p>❗ Brak parametru ?html=...</p>";
+      throw new Error("Brak HTML");
     }
+
+    const decodedHtml = decodeURIComponent(htmlEncoded);
+    const output = document.getElementById("output");
+    output.innerHTML = decodedHtml;
+
+    // Zamiana HTML → PDFMake
+    const pdfContent = htmlToPdfmake(output.innerHTML, { window: window });
+
+    // Tworzymy PDF
+    pdfMake.createPdf({ content: pdfContent }).open();
   </script>
 </body>
 </html>
