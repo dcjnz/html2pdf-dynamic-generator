@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Test PDFMake</title>
+  <meta charset="UTF-8" />
+  <title>Oferta PDF</title>
+
+  <!-- pdfmake + czcionki -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+  <!-- html-to-pdfmake -->
+  <script src="https://unpkg.com/html-to-pdfmake/browser.js"></script>
+
+  <!-- Twoje style (działają tylko dla wyświetlenia HTML na stronie, nie dla PDF) -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="output"></div>
+
   <script>
-    const doc = {
-      content: [
-        { text: "Hello World", fontSize: 18, bold: true }
-      ]
-    };
-    pdfMake.createPdf(doc).download("test.pdf");
+    const htmlEncoded = new URLSearchParams(window.location.search).get("html");
+    if (!htmlEncoded) {
+      document.body.innerHTML = "<p>❌ Brak treści HTML (brakuje ?html=...)</p>";
+      throw new Error("Brak HTML");
+    }
+
+    const html = decodeURIComponent(htmlEncoded);
+    const output = document.getElementById("output");
+    output.innerHTML = html;
+
+    // Zamiana HTML → PDFMake (zadziała na DOM, nie stringu!)
+    const pdfmakeContent = htmlToPdfmake(output, { window });
+
+    // Utwórz PDF z kopiowalnym tekstem
+    pdfMake.createPdf({
+      content: pdfmakeContent,
+      defaultStyle: {
+        font: 'Helvetica',
+        fontSize: 12
+      }
+    }).open();
   </script>
 </body>
 </html>
