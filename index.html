@@ -1,3 +1,34 @@
-const test = "<p>test</p>";
-const pdfContent = htmlToPdfmake(test, { window: window });
-pdfMake.createPdf({ content: pdfContent }).open();
+<!DOCTYPE html>
+<html lang="pl">
+<head><meta charset="UTF-8"><title>Oferta PDF debug</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdfmake/browser.js"></script>
+</head>
+<body>
+  <div id="output" style="border:1px solid red; padding:10px; margin:10px;"></div>
+
+  <script>
+    const htmlEnc = new URLSearchParams(window.location.search).get('html');
+    console.log('zakodowane html:', htmlEnc);
+    if (!htmlEnc) {
+      document.body.innerText = '❗ Brak parametru ?html=...';
+      return;
+    }
+
+    const html = decodeURIComponent(htmlEnc);
+    console.log('dekodowane html:', html);
+
+    const output = document.getElementById('output');
+    output.innerHTML = html;
+
+    console.log('innerHTML przez output:', output.innerHTML);
+
+    // teraz tworzymy PDF
+    const pdfContent = htmlToPdfmake(output.innerHTML, { window: window });
+    console.log('pdfContent struktura:', pdfContent);
+
+    pdfMake.createPdf({ content: pdfContent }).open();
+  </script>
+</body>
+</html>
