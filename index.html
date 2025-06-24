@@ -54,8 +54,8 @@
       output.innerHTML = html;
 
       const container = output.querySelector('#pdf-area') || output;
-      container.style.width = "1485px";
-      container.style.height = "2100px";
+      container.style.width = "210mm";
+      container.style.height = "297mm";
       container.style.margin = "0 auto";
     }
 
@@ -67,15 +67,15 @@
         filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: {
-          scale: 2,
+          scale: 4,
           scrollY: 0,
           useCORS: true,
           allowTaint: true,
           imageSmoothingEnabled: false
         },
         jsPDF: {
-          unit: 'px',
-          format: [1485, 2100], // mniejszy format = ostrzejszy obraz
+          unit: 'mm',
+          format: 'a4',
           orientation: 'portrait'
         }
       }).from(container).save();
