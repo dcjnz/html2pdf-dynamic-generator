@@ -51,26 +51,26 @@
       document.body.innerHTML = "<p>❌ Brak treści HTML (?html=...)</p>";
     } else {
       const output = document.getElementById("output");
-      output.innerHTML = `
-        <div id="pdf-area">
-          <img id="pdf-bg" src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/erfI3s1pt8JoVDnHimVt/papier%20firmowy.jpeg" alt="bg" />
-          ${html}
-        </div>
-      `;
+      output.innerHTML = html;
+
+      const container = output.querySelector('#pdf-area') || output;
+      container.style.width = "210mm";
+      container.style.height = "297mm";
+      container.style.margin = "0 auto";
     }
 
     document.getElementById("download-btn").addEventListener("click", () => {
-      const container = document.getElementById("pdf-area");
+      const container = document.getElementById("pdf-area") || document.getElementById("output");
 
       html2pdf().set({
         margin: 0,
         filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
-        image: { type: 'jpeg', quality: 1.0 },
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: {
-          scale: 4, // ultra jakość
+          scale: 4,
           scrollY: 0,
           useCORS: true,
-          allowTaint: false,
+          allowTaint: true,
           imageSmoothingEnabled: false
         },
         jsPDF: {
