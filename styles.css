@@ -11,11 +11,12 @@ html, body {
 
 #pdf-area {
   position: relative;
-  width: 210mm;
-  height: 297mm;
+  width: 1485px; /* ~A5 */
+  height: 2100px;
   margin: 0 auto;
-  overflow: hidden;
   color: #333;
+  background: white;
+  outline: 1px solid black;
 }
 
 #pdf-area::before {
@@ -35,30 +36,33 @@ html, body {
 #content {
   position: relative;
   z-index: 1;
-  padding: 0 35px;
+  padding: 60px;
 }
 
 h1 {
   text-align: center;
-  margin-top: 170px;
-  font-size: 25px;
-  margin-bottom: 15px;
+  margin-top: 100px;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 12px;
+  width: 100%;
   margin-bottom: 35px;
+  outline: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-table th,
-table td {
+th, td {
   border: 1px solid black;
   padding: 5px;
 }
 
-table tr:first-child {
+table tr:first-child th {
   background: linear-gradient(135deg,
     rgba(173, 216, 255, 0.5),
     rgba(120, 190, 255, 0.5),
@@ -67,24 +71,24 @@ table tr:first-child {
     rgba(30, 130, 255, 0.5));
 }
 
-table th {
+th {
   font-size: 13px;
   text-align: center;
 }
 
-table td {
+td {
   text-align: right;
 }
 
-table td:first-child {
+td:first-child {
   text-align: left;
 }
 
-table td:last-child {
+td:last-child {
   font-weight: 600;
 }
 
-table tr:last-child td {
+tr:last-child td {
   font-weight: 700;
 }
 
@@ -108,8 +112,7 @@ table tr:last-child td {
   content: "- ";
 }
 
-.section li,
-.section2 li {
+.section li, .section2 li {
   font-size: 13px;
 }
 
