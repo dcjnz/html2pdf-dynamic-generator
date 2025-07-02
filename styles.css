@@ -10,7 +10,7 @@ html, body {
 }
 
 #pdf-area {
-  width: 212mm;
+  width: 230mm;
   height: 297mm;
   overflow: hidden;
   position: relative;
