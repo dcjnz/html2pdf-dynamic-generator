@@ -5,18 +5,22 @@
 }
 
 html, body {
-  font-family: Arial, sans-serif;
-  background: white;
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  padding: 0;
+  background: none; /* lub ten sam background co pdf-area, jeśli chcesz */
 }
 
 #pdf-area {
   width: 210mm;
   height: 297mm;
-  overflow: hidden;
   position: relative;
   background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/LxJX70fpfkaOWupdQrGu/papier%20firmowy.png");
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
+  background-repeat: no-repeat;
+  /* usuń overflow: hidden; */
 }
 
 #content {
