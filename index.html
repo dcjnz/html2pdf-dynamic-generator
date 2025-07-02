@@ -2,15 +2,18 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Oferta PDF</title>
+  <title>Oferta - PDF Generator</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Ikonka pobierania (fontawesome) -->
   <script src="https://kit.fontawesome.com/a2e0e6a271.js" crossorigin="anonymous"></script>
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: #f2f2f2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -36,11 +39,13 @@
 
     #output {
       background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
+
   <button id="download-btn"><i class="fas fa-download"></i> Pobierz PDF</button>
   <div id="output"></div>
 
@@ -48,18 +53,23 @@
     const params = new URLSearchParams(window.location.search);
     const htmlEncoded = params.get("html");
     const html = decodeURIComponent(htmlEncoded || "");
+    const output = document.getElementById("output");
 
     if (!html) {
-      document.body.innerHTML = "<p>❌ Brak treści HTML (?html=...)</p>";
+      output.innerHTML = "<p>❌ Brak treści HTML (?html=...)</p>";
     } else {
-      const output = document.getElementById("output");
       output.innerHTML = html;
 
+      // Dostosuj szerokość i wysokość na podstawie parametru
       const container = output.querySelector('#pdf-area') || output;
-      const desiredHeight = container.getAttribute("data-height") || "297mm";
+      const desiredHeight = container.getAttribute("data-height") || "297mm"; // domyślnie A4
+      const desiredWidth = container.getAttribute("data-width") || "210mm";   // opcjonalnie
+
+      container.style.width = desiredWidth;
       container.style.height = desiredHeight;
-      container.style.width = "210mm";
-      container.style.margin = "0 auto";
+      container.style.position = "relative";
+      container.style.overflow = "hidden";
+      container.style.margin = "0 auto"; // Wyśrodkowanie tła
     }
 
     document.getElementById("download-btn").addEventListener("click", () => {
@@ -69,8 +79,17 @@
         margin: 0,
         filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
         image: { type: 'jpeg', quality: 1.0 },
-        html2canvas: { scale: 4, scrollY: 0, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        html2canvas: {
+          scale: 4,
+          scrollY: 0,
+          useCORS: true,
+          allowTaint: true
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait'
+        }
       }).from(container).save();
     });
   </script>
