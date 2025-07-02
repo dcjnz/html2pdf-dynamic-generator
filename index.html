@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Oferta PDF</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <style>
     body {
@@ -11,7 +12,6 @@
       background: #eee;
       padding: 20px;
     }
-
     #download-btn {
       margin-bottom: 20px;
       padding: 10px 20px;
@@ -22,11 +22,9 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     #download-btn:hover {
       background: #0056b3;
     }
-
     #output {
       display: flex;
       justify-content: center;
@@ -34,47 +32,34 @@
   </style>
 </head>
 <body>
-  <button id="download-btn">📄 Pobierz PDF</button>
+  <button id="download-btn">Pobierz PDF</button>
   <div id="output"></div>
 
   <script>
+    const { jsPDF } = window.jspdf;
+
     const params = new URLSearchParams(window.location.search);
-    const htmlEncoded = params.get("html");
-    const html = decodeURIComponent(htmlEncoded || "");
+    const html = decodeURIComponent(params.get("html") || "");
+    const output = document.getElementById("output");
+    if (!html) output.innerHTML = "<p style='color:red;'>Brak treści HTML (?html=...)</p>";
+    else output.innerHTML = html;
 
-    if (!html) {
-      document.body.innerHTML += "<p style='color:red;'>❌ Brak treści HTML (?html=...)</p>";
-    } else {
-      const output = document.getElementById("output");
-      output.innerHTML = html;
-    }
-
-    document.getElementById("download-btn").addEventListener("click", () => {
+    document.getElementById("download-btn").onclick = async () => {
       const pdfArea = document.getElementById("pdf-area");
-      const heightMm = parseInt(pdfArea.dataset.height) || 297;
+      const mmToPx = mm => mm * (96 / 25.4);
+      const A4wPx = mmToPx(210), A4hPx = mmToPx(parseInt(pdfArea.dataset.height) || 297);
 
-      // Wymuszone dokładne odwzorowanie A4
-      const opt = {
-        margin: [0, 0, 0, 0],
-        filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: {
-          scale: 4,     // maksymalna jakość
-          scrollY: 0,
-          useCORS: true,
-          allowTaint: true
-        },
-        jsPDF: {
-          unit: 'mm',
-          format: [210, heightMm],
-          orientation: 'portrait',
-          precision: 16
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
+      const canvas = await html2canvas(pdfArea, { scale: 4, useCORS:true, scrollY:0 });
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
-      html2pdf().set(opt).from(pdfArea).save();
-    });
+      const pdf = new jsPDF({
+        unit: 'px',
+        format: [A4wPx, A4hPx],
+      });
+      pdf.addImage(imgData, 'JPEG', 0, 0, A4wPx, canvas.height * (A4wPx / canvas.width));
+
+      pdf.save(`Oferta_${new Date().toISOString().slice(0,10)}.pdf`);
+    };
   </script>
 </body>
 </html>
