@@ -56,7 +56,7 @@
 
       html2pdf().set({
         margin: 0,
-        filename: `Oferta_${new Date().toISOString().slice(0)}.pdf`,
+        filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: {
           scale: 2,
@@ -65,7 +65,7 @@
         },
         jsPDF: {
           unit: 'mm',
-          format: [211.6, heightMm],
+          format: [210.1, heightMm],
           orientation: 'portrait'
         },
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
