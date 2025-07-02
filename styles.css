@@ -9,6 +9,13 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
+#output {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-top: 20px;
+}
+
 #pdf-area {
   position: relative;
   width: 210mm;
@@ -148,5 +155,4 @@ table tr:last-child td {
 }
 
 .section2 {
-  
 }
