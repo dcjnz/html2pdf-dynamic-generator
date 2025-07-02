@@ -24,6 +24,8 @@ html, body {
   z-index: 1;
   padding: 0 35px;
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 h1 {
