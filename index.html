@@ -5,10 +5,9 @@
   <title>Oferta PDF</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://kit.fontawesome.com/a2e0e6a271.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <button id="download-btn"><i class="fas fa-download"></i> Pobierz PDF</button>
+  <button id="download-btn">📄 Pobierz PDF</button>
   <div id="output"></div>
 
   <script>
@@ -31,7 +30,7 @@
     document.getElementById("download-btn").addEventListener("click", () => {
       const element = document.getElementById("pdf-area");
       html2pdf().set({
-        margin: [0, 0, 0, 0],
+        margin: 0,
         filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: {
