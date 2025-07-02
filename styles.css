@@ -12,6 +12,7 @@ html, body {
 #pdf-area {
   width: 210mm;
   height: 297mm;
+  overflow: hidden;
   position: relative;
   background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/LxJX70fpfkaOWupdQrGu/papier%20firmowy.png");
   background-size: cover;
