@@ -19,12 +19,7 @@
       document.body.innerHTML = "<p>❌ Brak treści HTML (?html=...)</p>";
     } else {
       const output = document.getElementById("output");
-      output.innerHTML = `
-        <div id="pdf-area">
-          <img id="pdf-bg" src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/erfI3s1pt8JoVDnHimVt/papier%20firmowy.jpeg" alt="Tło" />
-          <div id="content">${html}</div>
-        </div>
-      `;
+      output.innerHTML = html;
     }
 
     document.getElementById("download-btn").addEventListener("click", () => {
