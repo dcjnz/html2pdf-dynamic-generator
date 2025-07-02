@@ -7,13 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     body {
-      text-align: center;
-      background: #f0f0f0;
       font-family: Arial, sans-serif;
+      background: #eee;
     }
 
     #download-btn {
-      margin: 20px auto;
+      margin: 20px;
       padding: 10px 20px;
       font-size: 16px;
       background: #007bff;
@@ -25,11 +24,6 @@
 
     #download-btn:hover {
       background: #0056b3;
-    }
-
-    #output {
-      display: flex;
-      justify-content: center;
     }
   </style>
 </head>
@@ -53,7 +47,7 @@
       const element = document.getElementById("pdf-area");
 
       html2pdf().set({
-        margin: 0,
+        margin: [0, 0, 0, 0],
         filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: {
@@ -66,7 +60,7 @@
           format: [210, 297],
           orientation: 'portrait'
         },
-        pagebreak: { mode: ['avoid'] }
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       }).from(element).save();
     });
   </script>
