@@ -2,11 +2,13 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Oferta PDF Generator</title>
+  <title>Oferta PDF</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://kit.fontawesome.com/a2e0e6a271.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <button id="download-btn"><i class="fas fa-download"></i> Pobierz PDF</button>
   <div id="output"></div>
 
   <script>
@@ -15,25 +17,35 @@
     const html = decodeURIComponent(htmlEncoded || "");
 
     if (!html) {
-      document.body.innerHTML = "<p>Błąd: Brak treści HTML (brakuje parametru ?html=...)</p>";
+      document.body.innerHTML = "<p>❌ Brak treści HTML (?html=...)</p>";
     } else {
       const output = document.getElementById("output");
-      output.innerHTML = html;
-
-      setTimeout(() => {
-        html2pdf().set({
-          margin: 0,
-          filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: {
-            scale: 2,
-            scrollY: 0,
-            useCORS: true
-          },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        }).from(document.getElementById("pdf-area")).save();
-      }, 700);
+      output.innerHTML = `
+        <div id="pdf-area">
+          <img id="pdf-bg" src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/erfI3s1pt8JoVDnHimVt/papier%20firmowy.jpeg" alt="Tło" />
+          <div id="content">${html}</div>
+        </div>
+      `;
     }
+
+    document.getElementById("download-btn").addEventListener("click", () => {
+      const element = document.getElementById("pdf-area");
+      html2pdf().set({
+        margin: [0, 0, 0, 0],
+        filename: `Oferta_${new Date().toISOString().slice(0, 10)}.pdf`,
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: {
+          scale: 4,
+          scrollY: 0,
+          useCORS: true
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: [210, 297],
+          orientation: 'portrait'
+        }
+      }).from(element).save();
+    });
   </script>
 </body>
 </html>
