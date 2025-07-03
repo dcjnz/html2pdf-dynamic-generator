@@ -216,7 +216,7 @@ footer, .name {
   flex-direction: column;
   text-align: center;
   line-height:15px;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 
@@ -225,14 +225,14 @@ footer {
   z-index: 1;
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   border-top: 1px solid black;
   background: rgba(255, 255, 255, 0.7);
   padding: 10px 0;
   box-sizing: border-box;
 }
 
-footer div {
+footer div::before {
   content:url(https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/YszjySgEK5bdZTf2plKc/logo%20napis%20WLS%20small.png);
 }
 
