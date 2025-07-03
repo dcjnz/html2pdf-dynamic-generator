@@ -14,6 +14,10 @@ html, body {
   width: 210mm;
   height: 297mm;
   overflow: hidden;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 #bg-img {
@@ -28,6 +32,7 @@ html, body {
   position: relative;
   z-index: 1;
   padding: 0 35px;
+  flex: 1;
 }
 
 h5 {
@@ -201,19 +206,6 @@ table tr:last-child td {
 
 }
 
-
-
-[id="pdf-area"] {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  height: 297mm;
-}
-
-[id="content"] {
-  flex: 1;
-}
-
 footer, .name {
   font-family: 'Montserrat', sans-serif;
 }
@@ -223,12 +215,10 @@ footer, .name {
   align-items: flex-end;
   flex-direction: column;
   text-align: center;
-  line-height:22px;
+  line-height:15px;
+  font-size: 13px;
 }
 
-.name {
-  line-height:22px;
-}
 
 footer {
   text-align: center;
@@ -239,7 +229,7 @@ footer {
   background: rgba(255, 255, 255, 0.7);
 }
 
-footer div::before {
+footer div {
   content:url(https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/YszjySgEK5bdZTf2plKc/logo%20napis%20WLS%20small.png);
 }
 
