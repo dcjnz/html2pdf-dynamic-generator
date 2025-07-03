@@ -46,9 +46,12 @@ table {
   border: 0.1px solid black;
 }
 
-table th, table td {
+table th:nth-child(2n), table td:nth-child(2n) {
   border: 0.1px solid black;
-  padding: 5px;
+}
+
+table tr:nth-child(2n) {
+  border: 0.1px solid black;
 }
 
 table tr:first-child {
