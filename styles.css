@@ -10,22 +10,24 @@ html, body {
 }
 
 #pdf-area {
+  position: relative;
   width: 210mm;
   height: 297mm;
   overflow: hidden;
-  position: relative;
-  background-image: url("https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/F6CcmDiTGQi6BjaEimh0/papier%20firmowy%202.png");
-  background-size: 210mm 297mm;
-  background-repeat: no-repeat;
-  background-position: top left;
+}
+
+#bg-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 #content {
+  position: relative;
   z-index: 1;
   padding: 0 35px;
-  position: relative;
-  height: 100%;
-  width: 100%;
 }
 
 h1 {
