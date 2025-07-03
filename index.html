@@ -53,10 +53,10 @@
       const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
       const pdf = new jsPDF({
-        unit: 'pt',
-        format: [595.28, 841.89],
-        orientation: 'portrait'
+        unit: 'px',
+        format: [A4wPx, A4hPx],
       });
+      
       pdf.addImage(imgData, 'JPEG', 0, 0, A4wPx, canvas.height * (A4wPx / canvas.width));
 
       pdf.save(`Oferta_${new Date().toISOString().slice(0,10)}.pdf`);
