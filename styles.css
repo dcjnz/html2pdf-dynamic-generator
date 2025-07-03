@@ -30,10 +30,25 @@ html, body {
   padding: 0 35px;
 }
 
-h1 {
-  font-family: 'Arial', sans-serif;
-  text-align: center;
+h5 {
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-weight:500;
+  text-align: end;
   margin-top: 170px;
+  margin-bottom: 7px;
+}
+
+h4 {
+  font-family: Arial, sans-serif;
+  text-align: end;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  text-align: center;
   font-size: 25px;
   margin-bottom: 15px;
 }
@@ -43,7 +58,7 @@ table {
   border-collapse: collapse;
   font-size: 12px;
   margin-bottom: 35px;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 table th, table td {
@@ -56,14 +71,15 @@ table th:first-child, table td:first-child {
 }
 
 table tr:first-child {
-  background: linear-gradient(
-    135deg,
-    rgba(173, 216, 255, 0.5),
-    rgba(120, 190, 255, 0.5),
-    rgba(80, 170, 255, 0.5),
-    rgba(50, 150, 255, 0.5),
-    rgba(30, 130, 255, 0.5)
-  );
+background: linear-gradient(
+  135deg,
+  rgba(0, 140, 255, 0.4),
+  rgba(10, 150, 255, 0.4),
+  rgba(20, 160, 255, 0.4),
+  rgba(30, 170, 255, 0.4),
+  rgba(40, 180, 255, 0.4)
+);
+
 }
 
 table th {
@@ -81,6 +97,18 @@ table td {
   padding: 5px 5px;
   text-align: end;
   background: rgba(255, 255, 255, 0.6);
+}
+
+table td:nth-child(4)::after {
+  content: ' PLN';
+}
+
+table tr:not(:last-child) td:nth-child(2)::after {
+  content: ' PLN';
+}
+
+table tr:not(:last-child) td:nth-child(3)::after {
+  content: ' szt';
 }
 
 table td:nth-child(2) {
