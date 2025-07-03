@@ -51,7 +51,7 @@ h4 {
 h1 {
   font-family: Arial, sans-serif;
   text-align: center;
-  font-size: 36px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
@@ -207,6 +207,7 @@ table tr:last-child td {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 297mm;
 }
 
 [id="content"] {
@@ -234,11 +235,13 @@ footer {
   z-index: 5;
   width: 100%;
   border-top: 1px solid black;
-  font-size: 14px;
+  font-size: 12px;
   background: rgba(255, 255, 255, 0.7);
 }
 
-
+footer div::before {
+  content:url(https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/YszjySgEK5bdZTf2plKc/logo%20napis%20WLS%20small.png);
+}
 
 a {
   color: black;
