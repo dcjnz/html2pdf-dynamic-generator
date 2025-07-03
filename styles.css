@@ -42,6 +42,7 @@ table {
   border-collapse: collapse;
   font-size: 12px;
   margin-bottom: 35px;
+  font-family: 'Arial', sans-serif;
 }
 
 table th, table td {
@@ -124,6 +125,7 @@ table tr:last-child td {
 .section {
   margin-bottom: 40px;
   margin-left: 10px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .section p {
@@ -142,8 +144,76 @@ table tr:last-child td {
   margin-right: 5px;
 }
 
-.section li, .section2 li {
+.section li {
   font-size: 13px;
 }
 
-.section2 {}
+.section2 {
+  display: flex;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 60px;
+}
+
+.section2 ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section2 li {
+  position: relative;
+  padding-left: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.section2 li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 15px;
+  height: 15px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.856 10.303c.086.554.144 1.118.144 1.697 0 6.075-4.925 11-11 11s-11-4.925-11-11 4.925-11 11-11c2.347 0 4.518.741 6.304 1.993l-1.422 1.457c-1.408-.913-3.082-1.45-4.882-1.45-4.962 0-9 4.038-9 9s4.038 9 9 9c4.894 0 8.879-3.928 8.99-8.795l1.866-1.902zm-.952-8.136l-9.404 9.639-3.843-3.614-3.095 3.098 6.938 6.71 12.5-12.737-3.096-3.096z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+html, body {
+  height: 100%;
+}
+
+[id="pdf-area"] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+footer, .name {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.name {
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+}
+
+footer {
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+  border-top: 1px solid black;
+  font-size: 14px;
+}
+
+a {
+  color: black;
+  text-decoration: underline;
+  font-weight: 600;
+}
