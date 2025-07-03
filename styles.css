@@ -231,16 +231,14 @@ footer, .name {
 
 footer {
   text-align: center;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   border-top: 1px solid black;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.7);
 }
 
-footer div::before {
-  content:url(https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/YszjySgEK5bdZTf2plKc/logo%20napis%20WLS%20small.png);
-}
+
 
 a {
   color: black;
