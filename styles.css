@@ -39,8 +39,6 @@ h1 {
 
 table {
   width: 100%;
-  border-top: 0.1px solid black;
-  border-left: 0.1px solid black;
   border-collapse: collapse;
   font-size: 12px;
   margin-bottom: 35px;
@@ -50,6 +48,14 @@ table {
 table th, table td {
   border-bottom: 0.1px solid black;
   border-right: 0.1px solid black;
+}
+
+table th:first-child, table td:first-child {
+  border-left: 0.1px solid black;
+}
+
+table th {
+  border-top: 0.1px solid black;
 }
 
 table tr:first-child {
