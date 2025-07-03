@@ -43,10 +43,11 @@ table {
   font-size: 12px;
   margin-bottom: 35px;
   background: rgba(255, 255, 255, 0.6);
+  border: 0.1px solid black;
 }
 
 table th, table td {
-  border: 0.2px solid black;
+  border: 0.1px solid black;
   padding: 5px;
 }
 
