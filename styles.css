@@ -43,11 +43,11 @@ table {
   border-spacing: 0;
   font-size: 12px;
   margin-bottom: 35px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(205, 155, 255, 1.6);
 }
 
 table th, table td {
-  outline: 0.2px solid black;
+  border: 0.2px solid black;
 }
 
 table tr:first-child {
