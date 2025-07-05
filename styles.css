@@ -180,10 +180,14 @@ table tr:last-child td {
 .section p {
   margin-bottom: 10px;
   font-size: 15px;
+  font-weight: 600;
+}
+
+.section p strong {
+  font-weight: 800;
 }
 
 .section ul {
-  line-height: 120%;
   list-style: none;
   margin-left: 10px;
 }
@@ -195,7 +199,7 @@ table tr:last-child td {
 
 .section li {
   font-size: 14px;
-  line-height: 15px;
+  line-height: 16px;
 }
 
 .section2 {
@@ -203,6 +207,10 @@ table tr:last-child td {
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 20px;
+}
+
+.section2 strong {
+  font-weight: 800;
 }
 
 .section2 ul {
