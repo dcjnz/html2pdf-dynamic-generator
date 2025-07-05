@@ -32,7 +32,13 @@ html, body {
   padding: 0 35px;
   position: relative;
   z-index: 1;
-  padding-bottom: 60px; /* zostawiamy miejsce na footer */
+}
+
+.date::after {
+  content:url(https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/ffu4H8PwP7RwjIzzLhcd/pub/PneKihpXPDqwzAQF53zr/logo%20na%20papierze.png);
+  position: absolute;
+  top: 13px;
+  right: 28px;
 }
 
 .date {
@@ -166,7 +172,7 @@ table tr:last-child td {
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-left: 40px;
   font-family: 'Montserrat', sans-serif;
 }
@@ -183,19 +189,20 @@ table tr:last-child td {
 }
 
 .section li::before {
-  content: "-";
+  content: "–";
   margin-right: 5px;
 }
 
 .section li {
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 15px;
 }
 
 .section2 {
   display: flex;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 .section2 ul {
@@ -208,7 +215,7 @@ table tr:last-child td {
   padding-left: 25px;
   font-weight: 500;
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   color: #0054a3;
 }
 
