@@ -172,14 +172,14 @@ table tr:last-child td {
 }
 
 .section {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   margin-left: 40px;
   font-family: 'Montserrat', sans-serif;
 }
 
 .section p {
-  margin-bottom: 8px;
-  font-size: 15px;
+  margin-bottom: 4px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -193,7 +193,7 @@ table tr:last-child td {
 }
 
 .section li::before {
-  content: "–";
+  content: "✔";
   margin-right: 5px;
 }
 
@@ -222,8 +222,8 @@ table tr:last-child td {
   position: relative;
   padding-left: 25px;
   font-weight: 500;
-  font-size: 13px;
-  margin-bottom: 3px;
+  font-size: 11px;
+  margin-bottom: 0px;
   color: #0054a3;
 }
 
