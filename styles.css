@@ -44,7 +44,7 @@ html, body {
 .date {
   display: flex;
   flex-direction: row;
-  margin-top: 180px;
+  margin-top: 170px;
   margin-bottom: 20px;
   justify-content: space-between;
 }
@@ -206,7 +206,7 @@ table tr:last-child td {
   display: flex;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .section2 strong {
@@ -239,6 +239,8 @@ footer, .name {
 }
 
 .name {
+  position: relative;
+  right: 3rem;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
