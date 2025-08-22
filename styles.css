@@ -77,7 +77,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-size: 12px;
-  margin-bottom: 35px;
+  margin-bottom: 13px;
   font-family: Arial, sans-serif;
 }
 
@@ -172,13 +172,13 @@ table tr:last-child td {
 }
 
 .section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-left: 40px;
   font-family: 'Montserrat', sans-serif;
 }
 
 .section p {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 15px;
   font-weight: 600;
 }
@@ -198,8 +198,8 @@ table tr:last-child td {
 }
 
 .section li {
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 11px;
+  line-height: 18px;
 }
 
 .section2 {
@@ -222,7 +222,7 @@ table tr:last-child td {
   position: relative;
   padding-left: 25px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 3px;
   color: #0054a3;
 }
