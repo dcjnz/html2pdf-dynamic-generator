@@ -32,6 +32,8 @@ html, body {
   padding: 0 35px;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .date::after {
@@ -206,7 +208,6 @@ table tr:last-child td {
   display: flex;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 20px;
 }
 
 .section2 strong {
@@ -232,7 +233,7 @@ table tr:last-child td {
   padding-right: 7px;
   display: inline-block;
   vertical-align: middle;
-  transform: scale(85%);
+  transform: scale(75%);
 }
 
 footer, .name {
@@ -241,12 +242,14 @@ footer, .name {
 
 .name {
   margin-right: 2rem;
+  margin-left: 1rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: row;
   line-height:15px;
   font-size: 11px;
   justify-content: space-between;
+  flex: 1;
 }
 
 .termin {
