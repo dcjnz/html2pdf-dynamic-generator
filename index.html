@@ -81,7 +81,7 @@
       const mmToPx = mm => mm * (96 / 25.4);
       const A4wPx = mmToPx(210), A4hPx = mmToPx(parseInt(pdfArea.dataset.height) || 297);
 
-      const canvas = await html2canvas(pdfArea, { scale: 6, useCORS:true, scrollY:0 });
+      const canvas = await html2canvas(pdfArea, { scale: 3, useCORS:true, scrollY:0 });
       const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
       const pdf = new jsPDF({
