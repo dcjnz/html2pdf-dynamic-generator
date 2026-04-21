@@ -131,7 +131,43 @@ table tr:not(:last-child) td:nth-child(2)::after {
 }
 
 table tr:not(:last-child) td:nth-child(3)::after {
-  content: ' szt';
+  content: ' szt.';
+}
+
+.eur td:nth-child(4)::before {
+  content: '€';
+}
+
+.eur tr:not(:last-child) td:nth-child(2)::before {
+  content: '€';
+}
+
+.eur td:nth-child(4)::after {
+  content: ''!important;
+}
+
+.eur tr:not(:last-child) td:nth-child(2)::after {
+  content: ''!important;
+}
+
+.usd td:nth-child(4)::before {
+  content: '$';
+}
+
+.usd tr:not(:last-child) td:nth-child(2)::before {
+  content: '$';
+}
+
+.usd td:nth-child(4)::after {
+  content: ''!important;
+}
+
+.usd tr:not(:last-child) td:nth-child(2)::after {
+  content: ''!important;
+}
+
+.euro tr:not(:last-child) td:nth-child(3)::after, .dollar tr:not(:last-child) td:nth-child(3)::after {
+  content: ' pcs.';
 }
 
 table td:nth-child(2) {
