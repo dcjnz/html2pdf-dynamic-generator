@@ -166,7 +166,7 @@ table tr:not(:last-child) td:nth-child(3)::after {
   content: ''!important;
 }
 
-.euro tr:not(:last-child) td:nth-child(3)::after, .dollar tr:not(:last-child) td:nth-child(3)::after {
+.eur tr:not(:last-child) td:nth-child(3)::after, .usd tr:not(:last-child) td:nth-child(3)::after {
   content: ' pcs.'!important;
 }
 
