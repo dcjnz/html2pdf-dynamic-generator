@@ -134,6 +134,10 @@ table tr:not(:last-child) td:nth-child(3)::after {
   content: ' szt.';
 }
 
+table tr:not(:last-child) td:nth-child(3):empty::after {
+  content: '—';
+}
+
 .eur td:nth-child(4)::before {
   content: '€ ';
 }
