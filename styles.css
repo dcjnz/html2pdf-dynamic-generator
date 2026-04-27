@@ -138,6 +138,14 @@ table tr:not(:last-child) td:nth-child(3):empty::after {
   content: '—'!important;
 }
 
+table tr:not(:last-child) td:nth-child(2):empty::after {
+  content: 'Do uzgodnienia'!important;
+}
+
+table tr:not(:last-child) td:nth-child(4):empty::after {
+  content: 'Do uzgodnienia'!important;
+}
+
 .eur td:nth-child(4)::before {
   content: '€ ';
 }
