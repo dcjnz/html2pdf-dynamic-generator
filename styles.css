@@ -146,8 +146,12 @@ table tr:not(:last-child) td:nth-child(4):empty::after {
   content: 'Do uzgodnienia'!important;
 }
 
-.eur tr:not(:last-child) td:nth-child(2):empty::before, .eur tr:not(:last-child) td:nth-child(4):empty::before, .usd tr:not(:last-child) td:nth-child(2):empty::before, .usd tr:not(:last-child) td:nth-child(4):empty::before {
+.eur tr:not(:last-child) td:nth-child(2):empty::after, .eur tr:not(:last-child) td:nth-child(4):empty::after, .usd tr:not(:last-child) td:nth-child(2):empty::after, .usd tr:not(:last-child) td:nth-child(4):empty::after {
   content: 'TBA'!important;
+}
+
+.eur tr:not(:last-child) td:nth-child(2):empty::before, .eur tr:not(:last-child) td:nth-child(4):empty::before, .usd tr:not(:last-child) td:nth-child(2):empty::before, .usd tr:not(:last-child) td:nth-child(4):empty::before {
+  content: ''!important;
 }
 
 .eur td:nth-child(4)::before {
